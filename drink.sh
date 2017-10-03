@@ -72,6 +72,124 @@ drinkDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 # might have a failure edge case if someone manually makes a post without updating tracker file.
 
 
+## Oct 3, 2017
+# (doing just the basics)
+# making a choice here:
+#
+# use strictly bash variables and cli one-liner param setup
+# vs
+# stay in whiptail environment and let it handle user input / variables
+#
+# We'll want to eventually get it to be strictly cli capable with the ui as being optional
+# strict cli would move the needle forward for full automation progress (thinking ahead for scrapers and such)
+
+
+### Reminders for inital dev:
+#
+## Drink development doesn't have to care about:
+# repo : it'll just attempt current directory
+# youtube channel : basic Drink magic should only need the video id and parse data from that info
+# date : just grab today's // or grab it from youtube uri somehow
+#
+## Drink does need to :
+# remember to keep things simple in order to speed up development
+# have sanity checks
+# allow the user to preview and cancel when using Drink (before full auto gets built)
+# eventually be able to run as an auto chron job using a config file or repo checking code for sanity
+# not be able to endlessly loop into oblivion... I could see a simple error wiping all posts, leaving only the latest video, if not handled sanely.
+
+
+
+function drink_status {
+  # see if repo is clean so we don't have problems pushing later.
+  # also helps for protecting Drink Sanity Checks.
+
+  # git status;
+  # if clean continue,
+  # else do stuffs to reconcile... like force pull???
+
+}
+
+
+function drink_recipe {
+  # look for Drink.conf
+  # do stuffs
+  # check modal id
+
+}
+
+
+function drink_make(parameter) {
+  # heavy lifting is done here
+
+  # Sanity Check!!!
+  # make new post (or cp old one)
+  # write data
+  # save file
+
+}
+
+function drink_archive(oldnum) {
+  # this one might be hard as it might need to read filenames for all of posts/
+
+  # Sanity Check!!!
+  # foreach older than modalid $oldnum
+  # write published:false
+  # and mv from posts/ to archive/
+
+}
+
+function drink_cleanup {
+
+  # Sanity Check!!!
+  # This should only get ran after successful previous functions!
+
+  # update config / modalid
+  # += $modalid
+
+}
+
+
+function basicMagic {
+  ## Keep It Stupidly Simple
+
+  # git status
+  drink_status;
+
+  # get latest repo revision
+  git pull;
+
+  # look for config and modal info
+  drink_recipe;
+
+  # shaken, not stirred
+  drink_make;
+
+  # archive old post (leave certain number posted)
+  ## drink_archive might be too complex for basicMagic and need pulled out of basicMagic routine.
+  drink_archive;
+
+  # git status --> add all changes
+  # should we re-use drink_status here in an extended form or just add all?
+  git add ./* ; # this line could be dangerous and expose sensitive data if ran from wrong place
+  # recommend using instead? --> git add $prepDIR/*
+  # TODO: all of these functions should maybe be able to respond to parameters handling repo directory to work within
+
+  # commit with message "today's date along with youtube id or title?"
+  git commit -m "$date $youtubeid";
+
+  # git push origin/master ?
+  git push;
+
+  # update config / modalid
+  drink_cleanup;
+
+  echo "Congrats! You just got basicMagically drunk."
+
+}
+
+
+
 
 
 # take parameters and set as variables
