@@ -25,10 +25,12 @@
 ####    imports    ####
 
 # this gets Drink's full path and stores as a variable for the rest of the functions.
+# NOTE: this does not necessarilly equal the desired repo.
+# Another variable should eventually be provisioned in addition to this one for parameterized repo locations.
 drinkDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
-## preprepfunctions.sh: ##
-# . $drinkDIR/preprepfunctions.sh --source-only;
+## drinkfunctions.sh: ##
+# . $drinkDIR/drinkfunctions.sh --source-only;
 
 
 #### end of imports ####
@@ -118,18 +120,11 @@ function drink_recipe {
   # do stuffs
   # check modal id
 
-  function set_wallpaper_matrix {
-    # look for Drink.conf
-    echo "";
-    echo -en "searching for Drink.conf \r";
-    [ ! -f ~/Pictures/matrix.jpg ] && wget -P ~/Pictures/ http://cdn.wonderfulengineering.com/wp-content/uploads/2014/04/code-wallpaper-16.jpg;
-    echo -en "renaming matrix wallpaper    \r";
-    [ -f ~/Pictures/code-wallpaper-16.jpg ] && mv ~/Pictures/code-wallpaper-16.jpg ~/Pictures/matrix.jpg;
-    echo -en "setting desktop wallpaper to matrix.jpg \r";
-    # [ -f ~/Pictures/matrix.jpg ] && gsettings set org.gnome.desktop.background picture-uri file://~/Pictures/matrix.jpg;
-    [ -f ~/Pictures/matrix.jpg ] && gsettings set org.gnome.desktop.background picture-uri file:///home/$USER/Pictures/matrix.jpg;
-    echo "wallpaper set to: Matrix                    ";
-  }
+  # look for Drink.conf
+  echo "";
+  echo -en "searching for Drink.conf \r";
+  [ ! -f $drinkDIR/drink.conf ] && echo -en "drink.conf not found. generating new config. \r" && touch $drinkDIR/drink.conf < "1";
+
 
 }
 
