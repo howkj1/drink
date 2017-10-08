@@ -123,7 +123,19 @@ function drink_recipe {
   # look for Drink.conf
   echo "";
   echo -en "searching for Drink.conf \r";
+  # make a drink recipe if none found
   [ ! -f $drinkDIR/drink.conf ] && echo -en "drink.conf not found. generating new config. \r" && touch $drinkDIR/drink.conf < "1";
+
+  ## do I make a global variable and just set it to 0 and update it if file found?
+  ## or do I make a function variable and pass it from drink_recipe over to drink_make ?
+
+  # make, set, or read in a modalid
+
+  # make, set, or read in the date for the post... use current date or video posted date or just parse video title?
+
+  # make, set, or read in the post title / video title ??? depending on youtube api, this might not be easy
+
+
 
 
 }
