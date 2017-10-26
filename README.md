@@ -1,5 +1,22 @@
 # Drink
 
+
+## Looking to contribute? 
+### Roadmap
+
+< Roadmap goes here > 
+
+#### ToDo :
+
+- [x] take parameters and set as variables 
+- [ ] check repo status and pull
+- [ ] scraping a youtube channel
+- [ ] creating new post based on date
+- [ ] automatically updating post modal id
+- [ ] updating youtube embed url
+- [ ] commit
+- [ ] push
+
 ### Drink is for Jekyll
 
 [note: ] Drink is a work in progress with limited functionality as we get the initial code written for it.

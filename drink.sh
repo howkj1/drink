@@ -5,17 +5,6 @@
 
 # Drink is built to automate
 
-# ToDo :
-
-# take parameters and set as variables
-# - check repo status and pull
-# - scraping a youtube channel
-# - creating new post based on date
-# - automatically updating post modal id
-# - updating youtube embed url
-# - commit
-# - push
-
 
 # maybe use whiptail?
 
