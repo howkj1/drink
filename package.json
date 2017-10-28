@@ -3,14 +3,33 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "drink": "./drink.js"
+  },
   "scripts": {
-    "start": "npm i; node index.js",
+    "start": "run-s -l start:*",
+    "start:install": "npm i",
+    "start:clean": "rimraf output",
+    "start:output_dir": "mkdir output",
+    "start:install_globally": "npm i -g",
+    "start:run_stuff": "drink -h",
+    "demo": "run-s -ln demo:*",
+    "demo:clean": "rimraf output",
+    "demo:output_dir": "mkdir output",
+    "demo:run_stuff": "drink -y 'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA'",
+    "demo:verify": "ls -l ./output",
+    "clean": "rimraf output",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.11.0",
+    "npm-run-all": "^4.1.1",
     "request": "^2.83.0",
+    "rimraf": "^2.6.2",
     "xml2js": "^0.4.19"
   }
 }

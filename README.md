@@ -1,6 +1,6 @@
 # Drink
 
-
+![image](./tty.gif)
 ## Looking to contribute?
 
 ### Roadmap
