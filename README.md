@@ -1,17 +1,26 @@
 # Drink
 
 
-## Looking to contribute? 
+## Looking to contribute?
+
 ### Roadmap
 
-< Roadmap goes here > 
+MVP:
+git pull
+check youtube against current post/
+generate posts for missing videos
+set "published: false" for any videos older than newest 7 posts/videos
+git mv posts/olderThanNewest7 to archive/
+git commit -m "added (filenames) archived (filenames)"
+git push
+
 
 #### ToDo :
 
-- [x] take parameters and set as variables 
+- [x] take parameters and set as variables
 - [ ] check repo status and pull
-- [ ] scraping a youtube channel
-- [ ] creating new post based on date
+- [x] scraping a youtube channel
+- [ ] creating new post based on scraped data
 - [ ] automatically updating post modal id
 - [ ] updating youtube embed url
 - [ ] commit
@@ -28,7 +37,7 @@ Drink is being built to scrape a youtube channel and post new videos.
 
 This is, however, nowhere near done.
 
-For now, Drink will take an input of a youtube id parameter and do some magical stuffs. Complex scraper and additional functionality is only documented here for where we wish this project to go, whether it ever gets there or not. Be kind and pull request. 
+For now, Drink will take an input of a youtube id parameter and do some magical stuffs. Complex scraper and additional functionality is only documented here for where we wish this project to go, whether it ever gets there or not. Be kind and pull request.
 
 
 
