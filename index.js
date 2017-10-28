@@ -30,13 +30,13 @@ const parseStringFunction = (error, response, body) => (
   })
 );
 
-request(
-    'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA', 
+exports.youtubeRequest = channel => request(
+    channel,
     (error, response, body)=>parseStringFunction(error, response,body) 
 );
 
 
-
+// 'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA', 
 //  { id: [ 'yt:video:8ESuOlb_iD8' ],
 //    'yt:videoId': [ '8ESuOlb_iD8' ],
 //    'yt:channelId': [ 'UCfBeRuwRQuYZXUolxVoH0PA' ],
