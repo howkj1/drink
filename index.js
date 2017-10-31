@@ -5,7 +5,9 @@ var request = require('request');
 
 var parseStringFunction = (error, response, body) => ( 
   parseString(body, function (err, result) {
-      result.feed.entry.forEach(e => {
+      result.feed.entry
+       .filter((entry, inc)=> inc < 7)
+       .forEach(e => {
         var stream = fs
             .createWriteStream(
                 `./output/${e.published[0]}-announcements.markdown`
