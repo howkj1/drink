@@ -1,3 +1,5 @@
+
+[![Build Status](https://travis-ci.org/joshmccall221/drink.svg?branch=master)](https://travis-ci.org/joshmccall221/drink)
 # Drink
 
 ![image](./tty.gif)
