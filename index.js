@@ -3,7 +3,7 @@ var parseString = require('xml2js').parseString;
 var request = require('request');
 
 
-const parseStringFunction = (error, response, body) => ( 
+var parseStringFunction = (error, response, body) => ( 
   parseString(body, function (err, result) {
       result.feed.entry.forEach(e => {
         var stream = fs

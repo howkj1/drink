@@ -7,8 +7,7 @@
     "drink": "./drink.js"
   },
   "scripts": {
-    "start": "run-s -l start:*",
-    "start:install": "npm i",
+    "start": "npm i; run-s -l start:*",
     "start:clean": "rimraf output",
     "start:output_dir": "mkdir output",
     "start:install_globally": "npm i -g",
@@ -19,7 +18,7 @@
     "demo:run_stuff": "drink -y 'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA'",
     "demo:verify": "ls -l ./output",
     "clean": "rimraf output",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm start; npm run demo"
   },
   "author": "",
   "license": "ISC",
