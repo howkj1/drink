@@ -7,7 +7,7 @@
     "drink": "./drink.js"
   },
   "scripts": {
-    "start": "run-s -l start:*",
+    "start": "npm i; run-s -l start:*",
     "start:install": "npm i",
     "start:clean": "rimraf output",
     "start:output_dir": "mkdir output",
