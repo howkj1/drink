@@ -19,7 +19,7 @@
     "demo:run_stuff": "drink -y 'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA'",
     "demo:verify": "ls -l ./output",
     "clean": "rimraf output",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm test"
   },
   "author": "",
   "license": "ISC",
