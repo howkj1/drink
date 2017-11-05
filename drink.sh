@@ -17,7 +17,7 @@
 # NOTE: this does not necessarilly equal the desired repo.
 # Another variable should eventually be provisioned in addition to this one for parameterized repo locations.
 drinkDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
-
+echo $drinkDIR;
 ## drinkfunctions.sh: ##
 # . $drinkDIR/drinkfunctions.sh --source-only;
 
@@ -219,6 +219,8 @@ function basicDrink {
   # git status --> add all changes
   # should we re-use drink_status here in an extended form or just add all?
   echo "Adding drink output...";
+  cd $drinkDIR;
+  cd ../;
   git add ./* ; # this line could be dangerous and expose sensitive data if ran from wrong place
 
   # recommend using instead? --> git add $prepDIR/*
@@ -227,6 +229,8 @@ function basicDrink {
   # commit with message "today's date along with youtube id or title?"
   # git commit -m "$date $youtubeid";
   echo "Committing Drink Output...";
+  cd $drinkDIR;
+  cd ../;
   git commit -m "Drink : generated files on `date +'%Y-%m-%d %H:%M:%S'`";
 
   # git push origin/master ?
