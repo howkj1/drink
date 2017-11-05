@@ -154,7 +154,10 @@ function drink_archive() {
   echo "putting away old drinks...";
   #if file doesn't exist in archive, move it to archive folder
   # https://unix.stackexchange.com/a/248548
-  mv -n $drinkDIR/../_posts/* $drinkDIR/_archive/;
+  cd $drinkDIR;
+  cd ..;
+  mv -n ./_posts/* ./_archive/;
+  cd $drinkDIR;
 }
 
 function drink_sip() {
