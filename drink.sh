@@ -225,6 +225,7 @@ function basicDrink {
   cd $drinkDIR;
   cd ../;
   git add ./* ; # this line could be dangerous and expose sensitive data if ran from wrong place
+  cd $drinkDIR;
 
   # recommend using instead? --> git add $prepDIR/*
   # TODO: all of these functions should maybe be able to respond to parameters handling repo directory to work within
@@ -235,6 +236,7 @@ function basicDrink {
   cd $drinkDIR;
   cd ../;
   git commit -m "Drink : generated files on `date +'%Y-%m-%d %H:%M:%S'`";
+  cd $drinkDIR;
 
   # git push origin/master ?
   # TODO git push AFTER testing everything! Just uncomment next line.
