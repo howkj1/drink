@@ -1,9 +1,10 @@
 var fs = require('fs');
 var parseString = require('xml2js').parseString;
 var request = require('request');
+var i=7;
 
 
-var parseStringFunction = (error, response, body) => ( 
+var parseStringFunction = (error, response, body) => (
   parseString(body, function (err, result) {
       result.feed.entry
        .filter((entry, inc)=> inc < 7)
@@ -18,7 +19,7 @@ var parseStringFunction = (error, response, body) => (
                 stream.write(`title: ${e.title}\n`)
                 stream.write(`subtitle: ${e['media:group'][0]['media:description']}\n`)
                 stream.write('layout: default\n')
-                stream.write(`modal-id: \n`)
+                stream.write(`modal-id: ${i--} \n`)
                 stream.write(`date:  ${e.published[0]}\n`)
                 stream.write(`img: white_pixel.png\n`)
                 stream.write(`thumbnail: http://img.youtube.com/vi/${e['yt:videoId']}/0.jpg\n`)
@@ -34,11 +35,11 @@ var parseStringFunction = (error, response, body) => (
 
 exports.youtubeRequest = channel => request(
     channel,
-    (error, response, body)=>parseStringFunction(error, response,body) 
+    (error, response, body)=>parseStringFunction(error, response,body)
 );
 
 
-// 'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA', 
+// 'https://www.youtube.com/feeds/videos.xml?channel_id=UCfBeRuwRQuYZXUolxVoH0PA',
 //  { id: [ 'yt:video:8ESuOlb_iD8' ],
 //    'yt:videoId': [ '8ESuOlb_iD8' ],
 //    'yt:channelId': [ 'UCfBeRuwRQuYZXUolxVoH0PA' ],
@@ -47,7 +48,7 @@ exports.youtubeRequest = channel => request(
 //    author: [ { name: [Object], uri: [Object] } ],
 //    published: [ '2017-06-18T15:37:57+00:00' ],
 //    updated: [ '2017-06-18T16:12:03+00:00' ],
-//    'media:group':[ 
+//    'media:group':[
 //    { 'media:title': [Object],
 //    'media:content': [Object],
 //    'media:thumbnail': [Object],

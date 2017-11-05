@@ -93,109 +93,151 @@ drinkDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )";
 
 
 
-function drink_status {
-  # see if repo is clean so we don't have problems pushing later.
-  # also helps for protecting Drink Sanity Checks.
-
-  # git status;
-  # if clean continue,
-  # else do stuffs to reconcile... like force pull???
-
-}
-
-
-function drink_recipe {
-  # look for Drink.conf
-  # do stuffs
-  # check modal id
-
-  # look for Drink.conf
-  echo "";
-  echo -en "searching for Drink.conf \r";
-  # make a drink recipe if none found
-  [ ! -f $drinkDIR/drink.conf ] && echo -en "drink.conf not found. generating new config. \r" && touch $drinkDIR/drink.conf < "1";
-
-  ## do I make a global variable and just set it to 0 and update it if file found?
-  ## or do I make a function variable and pass it from drink_recipe over to drink_make ?
-
-  # make, set, or read in a modalid
-
-  # make, set, or read in the date for the post... use current date or video posted date or just parse video title?
-
-  # make, set, or read in the post title / video title ??? depending on youtube api, this might not be easy
+# function drink_status {
+#   # see if repo is clean so we don't have problems pushing later.
+#   # also helps for protecting Drink Sanity Checks.
+#
+#   # git status;
+#   # if clean continue,
+#   # else do stuffs to reconcile... like force pull???
+#
+#   # we're just gonna grab the latest code for now:
+#   git pull;
+#
+# }
 
 
+# function drink_recipe {
+#   # look for Drink.conf
+#   # do stuffs
+#   # check modal id
+#
+#   # look for Drink.conf
+#   echo "";
+#   echo -en "searching for Drink.conf \r";
+#   # make a drink recipe if none found
+#   [ ! -f $drinkDIR/drink.conf ] && echo -en "drink.conf not found. generating new config. \r" && touch $drinkDIR/drink.conf < "1";
+#
+#   ## do I make a global variable and just set it to 0 and update it if file found?
+#   ## or do I make a function variable and pass it from drink_recipe over to drink_make ?
+#
+#   # make, set, or read in a modalid
+#
+#   # make, set, or read in the date for the post... use current date or video posted date or just parse video title?
+#
+#   # make, set, or read in the post title / video title ??? depending on youtube api, this might not be easy
+#
+#
+#
+#
+# }
 
 
-}
-
-
-function drink_make(parameter) {
-  # heavy lifting is done here
-
-  # Sanity Check!!!
-  # make new post (or cp old one)
-  # write data
-  # save file
-
-}
-
-function drink_archive(oldnum) {
-  # this one might be hard as it might need to read filenames for all of posts/
-
-  # Sanity Check!!!
-  # foreach older than modalid $oldnum
-  # write published:false
-  # and mv from posts/ to archive/
-
-}
-
-function drink_cleanup {
-
-  # Sanity Check!!!
-  # This should only get ran after successful previous functions!
-
-  # update config / modalid
-  # += $modalid
+# function drink_make(parameter) {
+#   # heavy lifting is done here
+#
+#   # Sanity Check!!!
+#   # make new post (or cp old one)
+#   # write data
+#   # save file
+#
+# }
+function drink_make() {
+  #build latest drink
+  echo "making drink...";
+  npm start;
 
 }
 
+function drink_archive() {
+  #cleans the _posts/ folder
+  echo "putting away old drinks...";
+  #if file doesn't exist in archive, move it to archive folder
+  # https://unix.stackexchange.com/a/248548
+  mv -n $drinkDIR/../_posts/* $drinkDIR/_archive/;
+}
 
-function basicMagic {
+function drink_sip() {
+  #run drink and generate output
+  echo "sipping drink...";
+  npm run demo;
+}
+
+function drink_post() {
+  # posts new generated output to jekyll site
+  echo "writing home about drinks...";
+  mv -n $drinkDIR/output/* $drinkDIR/../_posts/;
+
+}
+
+# function drink_archive() {
+#   # this one might be hard as it might need to read filenames for all of posts/
+#
+#   # Sanity Check!!!
+#   # foreach older than modalid $oldnum
+#   # write published:false
+#   # and mv from posts/ to archive/
+#
+# }
+
+# function drink_cleanup {
+#
+#   # Sanity Check!!!
+#   # This should only get ran after successful previous functions!
+#
+#   # update config / modalid
+#   # += $modalid
+#
+# }
+
+
+function basicDrink {
   ## Keep It Stupidly Simple
+  echo "Starting Recipe For Basic Drink...";
 
   # git status
-  drink_status;
+  # drink_status;
 
-  # get latest repo revision
-  git pull;
+  # TODO get latest repo revision
+  #git pull;
 
   # look for config and modal info
-  drink_recipe;
+  # drink_recipe;
 
   # shaken, not stirred
   drink_make;
+  drink_archive;
+  drink_sip;
+  drink_post;
+
+
 
   # archive old post (leave certain number posted)
   ## drink_archive might be too complex for basicMagic and need pulled out of basicMagic routine.
-  drink_archive;
+  #drink_archive;
 
   # git status --> add all changes
   # should we re-use drink_status here in an extended form or just add all?
+  echo "Adding drink output...";
   git add ./* ; # this line could be dangerous and expose sensitive data if ran from wrong place
+
   # recommend using instead? --> git add $prepDIR/*
   # TODO: all of these functions should maybe be able to respond to parameters handling repo directory to work within
 
   # commit with message "today's date along with youtube id or title?"
-  git commit -m "$date $youtubeid";
+  # git commit -m "$date $youtubeid";
+  echo "Committing Drink Output...";
+  git commit -m "Drink : generated files on `date +'%Y-%m-%d %H:%M:%S'`";
 
   # git push origin/master ?
-  git push;
+  # TODO git push AFTER testing everything! Just uncomment next line.
+  #git push;
 
   # update config / modalid
-  drink_cleanup;
+  # drink_cleanup;
 
-  echo "Congrats! You just got basicMagically drunk."
+  # echo "Congrats! You just got basic drunk."
+  echo "Basic Drinking has completed.";
 
 }
 
@@ -212,64 +254,69 @@ function basicMagic {
 # - commit
 # - push
 
-function fullyAutomaticShotgun {
-  # this routine runs the full Drink automation suite
-  # ... drink the whole keg and party.
-
-  #  git diff-index --quiet HEAD -- || echo "untracked"; // do something about it
-  # git status;
-  git pull;
-  cp $lastNewestPost $newPost;
-  getHammered();
-  getWasted();
-  makeLove();
-  # add published:false line to metadata of x# old post and send it to archive folder
-  hideTheEvidence();
-  git add $postdir; echo "Look at you, you postdir child!";
-  git commit -m "$madeLove";
-
-  # $var1699 should contain today's/post's date
-  echo "PAAARRRRTTTAAAYYY! like its $var1699";
-}
-
-
-
-
-###>>>> this format works for whiptail menus >>>>>
-function main_menu {
-
-  RETVAL=$(whiptail --title "Make a selection and Enter" \
-  --menu "Main Menu" 10 50 4 \
-  "1." "Fully Automatic Shotgun -->" \
-  "2." "ToDo - fix this" \
-  "3." "ToDo - be careful!" \
-  "4." "Quit Drinking" \
-  3>&1 1>&2 2>&3)
-
-  # Below you can enter the corresponding commands
-
-  case $RETVAL in
-      # a) echo "custom menu goes here"; whiptail --title "cutom menu" --msgbox "goes here" 10 50;;
-      1.) fullyAutomaticShotgun;;
-      2.) echo "ToDo";;
-      3.) echo "ToDo";;
-      4.) echo "You have quit Drinking.";;
-      *) echo "You have quit Drinking.";
-  esac
-  # c) echo "I Am The Machine!";;
-
-}
-###<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# function fullyAutomaticShotgun {
+#   # this routine runs the full Drink automation suite
+#   # ... drink the whole keg and party.
+#
+#   #  git diff-index --quiet HEAD -- || echo "untracked"; // do something about it
+#   # git status;
+#   git pull;
+#   cp $lastNewestPost $newPost;
+#   getHammered();
+#   getWasted();
+#   makeLove();
+#   # add published:false line to metadata of x# old post and send it to archive folder
+#   hideTheEvidence();
+#   git add $postdir; echo "Look at you, you postdir child!";
+#   git commit -m "$madeLove";
+#
+#   # $var1699 should contain today's/post's date
+#   echo "PAAARRRRTTTAAAYYY! like its $var1699";
+# }
+#
 
 
-### Begin Drikning - Dead Last ###
 
-if (whiptail --title "Begin Drinking" --yesno "Drink is here to help! However, Drink Assumes Ubuntu 16.04 w/ Unity desktop and comes witout warranty nor liability. Use at your own risk." --yes-button "Continue Drinking" --no-button "Quit Drinking" 8 78)
-then
-  main_menu;
-else
-  echo "You have quit Drinking." # quits right away
-fi;
+# ###>>>> this format works for whiptail menus >>>>>
+# function main_menu {
+#
+#   RETVAL=$(whiptail --title "Make a selection and Enter" \
+#   --menu "Main Menu" 10 50 4 \
+#   "1." "Fully Automatic Shotgun -->" \
+#   "2." "ToDo - fix this" \
+#   "3." "ToDo - be careful!" \
+#   "4." "Quit Drinking" \
+#   3>&1 1>&2 2>&3)
+#
+#   # Below you can enter the corresponding commands
+#
+#   case $RETVAL in
+#       # a) echo "custom menu goes here"; whiptail --title "cutom menu" --msgbox "goes here" 10 50;;
+#       1.) fullyAutomaticShotgun;;
+#       2.) echo "ToDo";;
+#       3.) echo "ToDo";;
+#       4.) echo "You have quit Drinking.";;
+#       *) echo "You have quit Drinking.";
+#   esac
+#   # c) echo "I Am The Machine!";;
+#
+# }
+# ###<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#
+#
+# ### Begin Drikning - Dead Last ###
+#
+# if (whiptail --title "Begin Drinking" --yesno "Drink is here to help! However, Drink Assumes Ubuntu 16.04 w/ Unity desktop and comes witout warranty nor liability. Use at your own risk." --yes-button "Continue Drinking" --no-button "Quit Drinking" 8 78)
+# then
+#   main_menu;
+# else
+#   echo "You have quit Drinking." # quits right away
+# fi;
+#
+# ### end menu ###
+# #########################
 
-### end menu ###
-#########################
+
+# full auto cli run :
+basicDrink;
+echo "You have quit Drinking.";
