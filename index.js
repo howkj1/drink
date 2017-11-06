@@ -1,6 +1,7 @@
 var fs = require('fs');
 var parseString = require('xml2js').parseString;
 var request = require('request');
+var replace = require('stream-replace');
 var i=7;
 
 
@@ -11,7 +12,10 @@ var parseStringFunction = (error, response, body) => (
        .forEach(e => {
         var stream = fs
             .createWriteStream(
-                `./output/${e.published[0]}-announcements.markdown`
+                `./output/${e.published[0]
+                  .replace(/:/g, '-')
+                  .replace(/\+/g, '')
+                }-announcements.markdown`
             )
         stream
             .once('open', ()=>{
