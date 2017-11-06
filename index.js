@@ -13,6 +13,7 @@ var parseStringFunction = (error, response, body) => (
         var stream = fs
             .createWriteStream(
                 `./output/${e.published[0]
+                  .replace(/T/g, '-')
                   .replace(/:/g, '-')
                   .replace(/\+/g, '')
                 }-announcements.markdown`
