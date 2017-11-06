@@ -151,7 +151,11 @@ function basicDrink {
 
   # git push origin/master ?
   # TODO git push AFTER testing everything! Just uncomment next line.
-  #git push;
+  cd $drinkDIR;
+  cd ../;
+  git push;
+  cd $drinkDIR;
+
 
   # update config / modalid
   # drink_cleanup;
