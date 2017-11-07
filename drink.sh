@@ -77,6 +77,9 @@ function drink_archive() {
   cd $drinkDIR;
   cd ..;
   mv -n ./_posts/* ./_archive/;
+
+  # sanitize _posts folder
+  rm ./_posts/*
   cd $drinkDIR;
 }
 
