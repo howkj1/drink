@@ -2,6 +2,19 @@
 [![Build Status](https://travis-ci.org/joshmccall221/drink.svg?branch=master)](https://travis-ci.org/joshmccall221/drink)
 # Drink
 
+### How To Get Started Drinking :
+- git clone jekyll site repo
+- cd repo
+- git clone https://github.com/howkj1/drink.git
+- cd drink
+- chmod +x ./drink.sh
+- ./drink.sh
+
+TODO : setup drink to take parameters of which youtube channel to scrape and how many posts, etc.
+
+TODO : detect and work around manually published posts and archive when relevant... maybe setup drink to use its own jekyll folder like \_videos/ or something?
+
+
 ![image](./tty.gif)
 ## Looking to contribute?
 
@@ -60,15 +73,7 @@ Initially, Drink will be writing posts in this new/modified format since its fir
 
 _+_ [todo : ] We have not made a clean / non-customer edition of the updated theme as a template to work with Drink. That may be next once Drink is up and going.
 
-### How To :
-- git clone jekyll site repo
-- cd repo
-- git clone https://github.com/howkj1/drink.git
-- cd drink
-- chmod +x ./drink.sh
-- ./drink.sh
-TODO : setup drink to take parameters of which youtube channel to scrape and how many posts, etc.
-TODO : detect and work around manually published posts and archive when relevant... maybe setup drink to use its own jekyll folder like \_videos/ or something?
+
 
 <!--
 ### Drink <param1>
